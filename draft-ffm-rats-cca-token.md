@@ -240,7 +240,7 @@ Realm state.
 * The HES RoT, executing at run-time, maintains measurements for the state of the CCA
 platform TCB, including the lifecycle state of the CCA platform. It can answer requests
 coming from the RMM to collect and format claims corresponding to that state and use a
-CCA Platform Attestation Key (CPAK) to sign them.
+CCA Platform Attestation Key (CPAK) to sign them.  How the CPAK is derived is implementation-specific.
 
 {: #para-pak-intro}
 
@@ -279,7 +279,7 @@ Target Environment elements:
 The two sections use inter-related claims to bind together into a single logical unit.
 See {{sec-security-consideration}} for more details.
 
-The above tokens are presented to the requester within a top level CMW collection {{CMW}}.
+The above tokens are presented to the requester within a top level Conceptual Message WWrapper (CMW) collection {{CMW}}.
 
 
 
