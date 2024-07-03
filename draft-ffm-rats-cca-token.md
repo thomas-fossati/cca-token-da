@@ -33,8 +33,7 @@ author:
     email: thomas.fossati2@arm.com
  -  name: Giri Mandyam
     organization: Mediatek Inc
-    email: giri.mandyam@mediatek.com
-
+    email: giridhar.mandyam@gmail.com
 contributor:
  -  name: Yogesh Deshpande
     organization: Arm Limited
@@ -117,7 +116,7 @@ entity:
 The Arm Confidential Compute Architecture (CCA) is series of hardware and software
 innovations that enhance Arm’s support for Confidential Computing for large,
 compute-intensive workloads. Devices that implement CCA can produce attestation
-tokens as described in this memo, which are the basis trustworthiness assessment of
+tokens as described in this memo, which are the basis for trustworthiness assessment of
 the Confidential Compute environment.  This document specifies the CCA attestation
 token structure and semantics.
 
@@ -145,7 +144,7 @@ inherit the trust from the Non-secure hypervisor which controls it.
 
 As outlined in the RATS Architecture {{RFC9334}}, an Attester produces a signed collection
 of Claims that constitutes Evidence about its target environment. This document focuses
-on the output provided by requests from the Realm to the RMM management component for an
+on the output provided by requests from the Realm to the Realm Management Monitor (RMM) management component for an
 attestation token that covers the state of that Realm and the CCA Platform.
 This output corresponds to Evidence in {{RFC9334}} and, as a design decision, the CCA attestation
 token is a profile of the Entity Attestation Token (EAT) {{EAT}}. Note that there are other profiles
@@ -183,7 +182,9 @@ deeper level that can verify that the Root of Trust is authentic and
 unmodified.  An example of a RoT suitable
  for CCA would be an isolated
 Trusted subsystem responsible for initial measurements, lifecycle state
-management, identity and attestation services.
+management, identity and attestation services.  The services that the RoT
+provides for securitization of the CCA environment are descibed as Hardware-Enforced Security (HES) - 
+see Section B4.1.5 of {{RME}}.
 
 Realm-World:
 : Realm World, provides a security state and physical address range that provides
@@ -221,7 +222,7 @@ The Attesting Environment is responsible for collecting the information to be
 represented in CCA claims and to assemble them into Evidence. It is made of three
 cooperating components:
 
-* The Main Bootloader, executing at boot-time, measures the TCB of the Realm World
+* The Main Bootloader, executing at boot-time, measures the trusted computing base (TCB) of the Realm World
 - i.e., loaded firmware components and sends them to the HES RoT to be stored isolated.
   (CCA Platform Boot State). See {{fig-cca-attester-boot}}.
 
