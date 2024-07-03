@@ -106,7 +106,6 @@ informative:
     title: Veraison ccatoken package
     target: https://github.com/veraison/ccatoken
     date: 2022
-  CCC-Endorsements: I-D.TODO-rats-cca-endorsements
   RATS-CoRIM: I-D.ietf-rats-corim
   RATS-AR4SI: I-D.ietf-rats-ar4si
 
@@ -210,7 +209,6 @@ In this document, the structure of data is specified in Concise Data Definition 
 {{fig-cca-attester}} outlines the structure of the CCA Attester according to
 the conceptual model described in {{Section 3.1 of RFC9334}}.
 
-**TODO**
 ~~~ aasvg
 {::include art/cca-attester.ascii-art}
 ~~~
@@ -225,15 +223,13 @@ cooperating components:
 
 * The Main Bootloader, executing at boot-time, measures the TCB of the Realm World
 - i.e., loaded firmware components and sends them to the HES RoT to be stored isolated.
-  (CCA Platform Boot State). See **TODO** {{fig-cca-attester-boot}}.
+  (CCA Platform Boot State). See {{fig-cca-attester-boot}}.
 
-**TODO**
 ~~~ aasvg
 {::include art/cca-boot.ascii-art}
 ~~~
-{: #fig-cca-attester-boot
-   title="CCA Attester Boot Phase"
-   align="center" }
+
+{: #fig-cca-attester-boot title="CCA Attester Boot Phase" align="center" }
 
 * The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
 the state of a Realm. It can respond to requests issued from a Realm for an attestation
@@ -246,8 +242,10 @@ platform TCB, including the lifecycle state of the CCA platform. It can answer r
 coming from the RMM to collect and format claims corresponding to that state and use a
 CCA Platform Attestation Key (CPAK) to sign them. 
 
+{: #para-pak-intro} 
+
 See {{fig-cca-attester-runtime}}.
-  {: #para-ias-intro}
+  
 
 
 ~~~ aasvg
@@ -270,7 +268,6 @@ A reference implementation of the CCA Attester is provided by {{TF-RMM}}.
 {: #sec-cca-claims }
 
 This section describes the claims to be used in a CCA reference attestation token.
-A more comprehensive treatment of the EAT profile(s) defined by CCA is found in {{sec-profiles}}.  
 
 There are two logical sections within the CCA attestation token, relating to the two
 Target Environment elements: 
@@ -340,18 +337,18 @@ This claim MUST be present in a CCA Platform attestation token.
 ### CCA Platform Instance ID
 {: #sec-instance-id-claim}
 
-The Instance ID claim represents the unique identifier of the Initial
-Attestation Key (IAK). 
+The Instance ID claim represents the unique identifier of the Platform
+Attestation Key (PAK). 
 The EAT `ueid` (claim key 256) of type RAND is used.  The following constraints
 apply to the `ueid-type`:
 
 * The length MUST be 33 bytes.
-* The first byte MUST be 0x01 (RAND) followed by the 32-byte unique identifier of the IAK.
+* The first byte MUST be 0x01 (RAND) followed by the 32-byte unique identifier of the PAK.
 
 This claim MUST be present in a CCA Platform attestation token.
 
 ~~~
-{::include cddl/platform/arm-instance-id.cddl}
+{::include cddl/platform/arm-platform-instance-id.cddl}
 ~~~
 
 ### CCA Platform Implementation ID
@@ -374,13 +371,13 @@ Note that this identifies the CCA Platform implementation, not a particular inst
 To uniquely identify an instance, see the Instance ID claim {{sec-instance-id-claim}}.
 
 ~~~
-{::include cddl/platform/arm-implementation-id.cddl}
+{::include cddl/platform/arm-platform-implementation-id.cddl}
 ~~~
 
 ## Target State Claims
 
 ### CCA Platform Profile Definition
-{: #sec-profile-definition-claim}
+{: #sec-plat-profile-definition-claim}
 
 The CCA platform profile claim identifies the EAT profile to which the CCA platform token
 conforms. This allows a receiver to assign the intended semantics to the rest of the claims
@@ -433,7 +430,7 @@ The CDDL representation is shown below.
 {{tab-states-map}} provides the mappings between {{fig-lifecycle-states}} and the data model.
 
 ~~~
-{::include cddl/platform/arm-security-lifecycle.cddl}
+{::include cddl/platform/arm-platform-security-lifecycle.cddl}
 ~~~
 
 `psa-lifecycle-unknown-type` is not shown in {{fig-lifecycle-states}}; it represents an invalid state that must not occur in a system.
@@ -489,7 +486,7 @@ Attestation Result, which may or may not include the original Software
 Components claim.
 
 ~~~
-{::include cddl/platform/arm-software-components.cddl}
+{::include cddl/platform/arm-platform-software-components.cddl}
 ~~~
 
 #### Component Type
@@ -555,7 +552,7 @@ the verification service API). A Relying Party may choose to ignore this claim
 in favor of other information.
 
 ~~~
-{::include cddl/platform/arm-verification-service-indicator.cddl}
+{::include cddl/platform/arm-platform-verification-service-indicator.cddl}
 ~~~
 
 It is assumed that the relying party is pre-configured with a list of trusted
@@ -571,7 +568,7 @@ as it would treat any other information provided by an external party,
 which includes attacker-provided data.
 
 ### CCA Platform Hash Algorithm ID
-{: #sec-cca-platform-hash-algm-id}
+{: #sec-arm-platform-hash-algm-id}
 
 The CCA platform hash algorithm ID claim is a text string that identifies
 the algorithm used to calculate the extended measurements in the CCA platform token.
@@ -607,13 +604,13 @@ attestation technologies, this specifications applies the following constraints
 This claim MUST be present in a CCA Realm state attestation token.
 
 ~~~
-{::include cddl/realm/realm-challenge.cddl}
+{::include cddl/realm/cca-realm-challenge.cddl}
 ~~~
 
 ### CCA Platform Profile Definition
-{: #sec-profile-definition-claim}
+{: #sec-realm-profile-definition-claim}
 
-The CCA platform profile claim identifies the EAT profile to which the Realm platform token
+The Realm profile claim identifies the EAT profile to which the Realm token
 conforms. This allows a receiver to assign the intended semantics to the rest of the claims
 found in the token.
 
@@ -629,7 +626,7 @@ Platform and Realm claims.
 
 
 ~~~
-{::include cddl/realm/realm-profile.cddl}
+{::include cddl/realm/cca-realm-profile.cddl}
 ~~~
 
 ### Realm Personalisation Value
@@ -641,7 +638,7 @@ at Realm creation.
 This claim MUST be present in a CCA Realm state attestation token.
 
 ~~~
-{::include cddl/realm/realm-rpv.cddl}
+{::include cddl/realm/cca-realm-personalization-value.cddl}
 ~~~
 
 ### Realm Initial Measurement
@@ -653,7 +650,7 @@ before the Realm is activated.
 This claim MUST be present in a CCA Realm state attestation token.
 
 ~~~
-{::include cddl/realm/realm-rim.cddl}
+{::include cddl/realm/cca-realm-initial-measurement.cddl}
 ~~~
 
 ### Realm Extensible Measurements
@@ -666,11 +663,11 @@ maintained by the RMM.
 This claim MUST be present in a CCA Realm state attestation token.
 
 ~~~
-{::include cddl/realm/realm-rem.cddl}
+{::include cddl/realm/cca-realm-extensible-measurements.cddl}
 ~~~
 
 ### Realm Hash Algorithm Measurements
-{: #sec-realm-hash-algo-claim}
+{: #sec-realm-hash-algm-id-claim}
 
 The Realm hash algorithm ID claim identifies the algorithm used to calculate
 all hash values which are present in the Realm token.
@@ -681,7 +678,7 @@ in the "Named Information Hash Algorithm Registry" {{!IANA.named-information}}.
 This claim MUST be present in a CCA Realm state attestation token.
 
 ~~~
-{::include cddl/realm/realm-hash-algo.cddl}
+{::include cddl/realm/cca-realm-hash-algo-id.cddl}
 ~~~
 
 ### Realm Public Key
@@ -694,7 +691,7 @@ The value of the Realm public key claim is a byte string representation of a COS
 This claim MUST be present in a CCA Realm state attestation token.
 
 ~~~
-{::include cddl/realm/realm-public-key.cddl}
+{::include cddl/realm/cca-realm-public-key.cddl}
 ~~~
 
 
@@ -709,7 +706,7 @@ such that it can be presented as a Challenge for the bound CCA Platform token
 This claim MUST be present in a CCA Realm state attestation token.
 
 ~~~
-{::include cddl/realm/realm-public-key-hash-algo.cddl}
+{::include cddl/realm/cca-realm-public-key-hash-algo-id.cddl}
 ~~~
 
 
@@ -749,7 +746,7 @@ CCA Platform and Realm state claim set are presented within a CMW Collection
 as in the Delegated model. The two parts of the collection are bound
 together by the Nonce claim in the CCA Platform token having the same value
 as the hash of the Realm state claim set. If the Direct Model is used,
-the CCA Platfrom profile claim {{sec-profile-definition-claim}} MUST
+the CCA Platfrom profile claim {{sec-plat-profile-definition-claim}} MUST
 have a different value from the reference profile. The map value within
 the CCA Attestation token CMW Collection for the Realm state claim set
 MUST also have a different value to that used for a Realm state CMW
@@ -772,7 +769,7 @@ Besides, only definite-length string, arrays, and maps are allowed.
 Given that a PSA Attester is typically found in a constrained device, it MAY
 NOT emit CBOR preferred serializations ({{Section 4.1 of STD94}}).
 Therefore, the Verifier MUST be a variation-tolerant CBOR decoder.
-TODO:: need different narrative from IoT reasons...
+TODO.... need different narrative from IoT reasons...
 
 Cryptographic protection is obtained by wrapping the CCA Platform and Realm state claims-set in a COSE
 Web Token (CWT) {{!RFC8392}}.  The signature structure MUST be a tagged (18) COSE_Sign1.
@@ -824,23 +821,23 @@ For use in CCA tokens, it must be possible to encode the epoch handle as an opaq
 # Collated CDDL
 
 ~~~
-{::include cddl/cca-attestation.cddl}
+TODO...include cddl/cca-attestation.cddl
 ~~~
 
 # Signing key implementation alternatives
 {: #sec-signing-keys}
 
-In the CCA Platform reference design, IAKs ({{para-ias-intro}}) are raw public keys.
+In the CCA Platform reference design, PAKs ({{para-pak-intro}}) are raw public keys.
 
-Some implementations may choose to use an IAK that is a certified public keys. If
+Some implementations may choose to use an PAK that is a certified public keys. If
 this option is taken, the value of the CCA Platform Profile Definition claim
-{{sec-profile-definition-claim}} MUST be altered from the reference implementation
+{{sec-plat-profile-definition-claim}} MUST be altered from the reference implementation
 value.
 
-TODO:: perhaps lose this justification section as...
+TODO... perhaps lose this justification section as...
 
 Certified public keys require the manufacturer to run the certification
-authority (CA) that issues X.509 certs for the IAKs.  (Note that operating a CA
+authority (CA) that issues X.509 certs for the PAKs.  (Note that operating a CA
 is a complex and expensive task that may be unaffordable to certain
 manufacturers.)
 
@@ -853,9 +850,9 @@ Using certified public keys offers better scalability properties when compared t
 
 Furthermore, existing and well-understood revocation mechanisms can be readily used.
 
-TODO:: ...to here
+TODO... ...to here
 
-The IAK's X.509 cert can be inlined in the CCA Platform token using the `x5chain` COSE
+The PAK's X.509 cert can be inlined in the CCA Platform token using the `x5chain` COSE
 header parameter {{COSE-X509}} at the cost of an increase in the CCA Platform token
 size.
 Note that the exact split between pre-provisioned and inlined certs may vary
@@ -865,7 +862,7 @@ chain, or the EE and the full chain up to the trust anchor (see {{Section 2 of
 COSE-X509}} for the details).
 
 
-TODO::lose following as IoT centric?? ::
+TODO...lose following as IoT centric?? ::
 Constraints around network bandwidth and computing resources available to endpoints,
 such as network buffers, may dictate a reasonable split point.
 
@@ -877,7 +874,7 @@ encoding for the token. Primary trust is established by checking the signing of
 the CCA Platform token CWT.
 The key used for verification is supplied to the Verifier by an
 authorized Endorser along with the corresponding Attester's Instance ID.
-For the verifier, the CCA Platform Instance ID {{: #}}sec-instance-id-claim}} claim is
+For the verifier, the CCA Platform Instance ID {{sec-instance-id-claim}} claim is
 used to assist locating the key used to verify the signature covering the CCA Platform
 CWT token. The verifier can also be supplied with the information that the 
 key instance has been revoked and is no longer valid.
@@ -951,10 +948,10 @@ of RATS-AR4SI}}.
 ## Endorsements, Reference Values and Verification Key Material
 {: #sec-cca-endorsements}
 
-The **TODO**  {{CCA-Endorsements}} defines a protocol based on the {{RATS-CoRIM}} data model
+The **TODO**  ref-to-CCA-Endorsements defines a protocol based on the {{RATS-CoRIM}} data model
 that can be used to convey CCA Endorsements, Reference Values and verification
 key material to the Verifier.
-TODO:: perhaps redact this section until we can work on the cca-endorsements doc??
+TODO... perhaps redact this section until a cca-endorsements draft is available?
 
 # Implementation Status
 
@@ -971,7 +968,7 @@ This specification re-uses the EAT specification and therefore the CWT specifica
 Hence, the security and privacy considerations of those specifications apply here as well.
 
 
-TODO:: questionable ability to execute on this as anyone can call RSI??
+TODO... questionable ability to execute on this as anyone can call RSI??
 A PSA Attester MUST NOT provide Evidence to an untrusted
 challenger, as it may allow attackers to interpose and trick the Verifier into
 believing the attacker is a legitimate Attester.
@@ -998,7 +995,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2395
 * Claim Value Type(s): unsigned integer
-* Change Controller: Hannes Tschofenig      TODO::: find document centric change controller...
+* Change Controller: Hannes Tschofenig      TODO... find document centric change controller...
 * Specification Document(s): {{sec-security-lifecycle}} of {{&SELF}}
 
 ### Implementation ID Claim
@@ -1049,7 +1046,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Claim Key: 2402
 * Claim Value Type(s): text string
 * Change Controller: Hannes Tschofenig
-* Specification Document(s): {{sec-cca-platform-hash-algm-id}} of {{&SELF}}
+* Specification Document(s): {{sec-arm-platform-hash-algm-id}} of {{&SELF}}
 
 ### CCA Token Platform Token Label
 
@@ -1157,17 +1154,18 @@ The Content-Formats should be allocated from the Expert review range (0-255).
 
 *  Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:cca#1.0.0"
 *  Encoding: -
-*  Id: [[To-be-assigned by IANA]]
+*  Id: To-be-assigned by IANA   .....TODO brackets through ID errors
 *  Reference: {{&SELF}}
 
 *  Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:realm#1.0.0"
 *  Encoding: -
-*  Id: [[To-be-assigned by IANA]]
+*  Id: To-be-assigned by IANA
 *  Reference: {{&SELF}}
 
 --- back
 
-<<<Current WIP edit point>>>
+CURRENT WIP EDIT POINT
+
 # Examples
 
 The following examples show CCA attestation tokens for an hypothetical system
@@ -1178,26 +1176,26 @@ SECURED.
 ## COSE Sign1 Token {#ex-sign1}
 
 ~~~
-{::include cddl/example/sign1-claims.diag}
+TODO...include cddl/example/sign1-claims.diag
 ~~~
 
-The JWK representation of the IAK used for creating the COSE Sign1 signature
+The JWK representation of the PAK used for creating the COSE Sign1 signature
 over the PSA token is:
 
 ~~~
-{::include cddl/example/tfm-es-iak.json}
+TODO...include cddl/example/tfm-es-iak.json
 ~~~
 
 The resulting COSE object is:
 
 ~~~
-{::include cddl/example/psa-sign1.diag}
+TODO...include cddl/example/psa-sign1.diag
 ~~~
 
 which has the following base16 encoding:
 
 ~~~
-{::include cddl/example/psa-sign1.hex}
+TODO...include cddl/example/psa-sign1.hex
 ~~~
 
 # Acknowledgments
