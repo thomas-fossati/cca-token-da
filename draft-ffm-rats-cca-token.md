@@ -3,7 +3,7 @@ v: 1
 
 title: "Arm's Confidential Compute Architecture Reference Attestation Token"
 abbrev: "CCA Reference Attestation Token"
-docname: draft-frost-rats-cca-token-latest
+docname: draft-ffm-rats-cca-token-latest
 category: info
 submissionType: independent
 
@@ -115,7 +115,7 @@ entity:
 --- abstract
 
 The Arm Confidential Compute Architecture (CCA) is series of hardware and software
-innovations that enhance Arm’s support for Confidential Computing for large, 
+innovations that enhance Arm’s support for Confidential Computing for large,
 compute-intensive workloads. Devices that implement CCA can produce attestation
 tokens as described in this memo, which are the basis trustworthiness assessment of
 the Confidential Compute environment.  This document specifies the CCA attestation
@@ -146,7 +146,7 @@ inherit the trust from the Non-secure hypervisor which controls it.
 As outlined in the RATS Architecture {{RFC9334}}, an Attester produces a signed collection
 of Claims that constitutes Evidence about its target environment. This document focuses
 on the output provided by requests from the Realm to the RMM management component for an
-attestation token that covers the state of that Realm and the CCA Platform. 
+attestation token that covers the state of that Realm and the CCA Platform.
 This output corresponds to Evidence in {{RFC9334}} and, as a design decision, the CCA attestation
 token is a profile of the Entity Attestation Token (EAT) {{EAT}}. Note that there are other profiles
 of EAT available, such as {{I-D.kdyxy-rats-tdx-eat-profile}} and {{I-D.mandyam-rats-qwestoken}},
@@ -187,7 +187,7 @@ management, identity and attestation services.
 
 Realm-World:
 : Realm World, provides a security state and physical address range that provides
-an execution environment for VMs that is isolated from the Normal and Secure worlds. 
+an execution environment for VMs that is isolated from the Normal and Secure worlds.
 The controlling firmware running in the Realm world can access memory in the Normal
 world to allow shared buffers. (This is similar to Trusted Execution Environment (TEE),
 "secure world", or "secure enclave".)
@@ -228,24 +228,23 @@ cooperating components:
 ~~~ aasvg
 {::include art/cca-boot.ascii-art}
 ~~~
-
 {: #fig-cca-attester-boot title="CCA Attester Boot Phase" align="center" }
 
 * The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
 the state of a Realm. It can respond to requests issued from a Realm for an attestation
-token relevant for that Realm by obtaining a CCA Platform attestation token from the 
-HES RoT and combining that with an attestation token containing Evidence reflecting 
+token relevant for that Realm by obtaining a CCA Platform attestation token from the
+HES RoT and combining that with an attestation token containing Evidence reflecting
 Realm state.
 
 * The HES RoT, executing at run-time, maintains measurements for the state of the CCA
 platform TCB, including the lifecycle state of the CCA platform. It can answer requests
 coming from the RMM to collect and format claims corresponding to that state and use a
-CCA Platform Attestation Key (CPAK) to sign them. 
+CCA Platform Attestation Key (CPAK) to sign them.
 
-{: #para-pak-intro} 
+{: #para-pak-intro}
 
 See {{fig-cca-attester-runtime}}.
-  
+
 
 
 ~~~ aasvg
@@ -270,7 +269,7 @@ A reference implementation of the CCA Attester is provided by {{TF-RMM}}.
 This section describes the claims to be used in a CCA reference attestation token.
 
 There are two logical sections within the CCA attestation token, relating to the two
-Target Environment elements: 
+Target Environment elements:
 
 * The CCA Platform token
 
@@ -324,7 +323,7 @@ attestation technologies, this specifications applies the following constraints
 
 Where the CCA Platform implementation uses the Delegated Token signing model {{sec-token-binding}}, the
 value of the Nonce claim will be a hash of the Realm Public Key claim of the CCA Realm State token
-{{sec-realm-public-key-claim}}. 
+{{sec-realm-public-key-claim}}.
 
 This claim MUST be present in a CCA Platform attestation token.
 
@@ -338,7 +337,7 @@ This claim MUST be present in a CCA Platform attestation token.
 {: #sec-instance-id-claim}
 
 The Instance ID claim represents the unique identifier of the Platform
-Attestation Key (PAK). 
+Attestation Key (PAK).
 The EAT `ueid` (claim key 256) of type RAND is used.  The following constraints
 apply to the `ueid-type`:
 
@@ -402,7 +401,7 @@ with previous versions of the CCA Platform attestation token format.
 {: #sec-security-lifecycle }
 
 The Security Lifecycle claim represents the current lifecycle state of the CCA
-Platform. 
+Platform.
 
 The state is represented by an integer that is divided as follows:
 
@@ -410,7 +409,7 @@ The state is represented by an integer that is divided as follows:
 * minor\[7:0\] - IMPLEMENTATION DEFINED state.
 
 The CCA Platform lifecycle states are illustrated in {{fig-lifecycle-states}}.
-A non debugged CCA platform will be in psa-lifecycle-secured state. 
+A non debugged CCA platform will be in psa-lifecycle-secured state.
 Realm Management Security Domain debug is always recoverable, and would
 therefore be represented by psa-lifecycle-non-psa-rot-debug state. Root
 world debug is recoverable on a HES system and would be represented by
@@ -451,7 +450,7 @@ The CDDL representation is shown below.
 
 The CCA platform config claim describes the set of chosen implementation options
 of the CCA platform. As an example, these may include a description of the level
-of physical memory protection which is provided. 
+of physical memory protection which is provided.
 
 The CCA platform config claim is expected to contain the System Properties field
 which is present in the Root Non-volatile Storage (RNVS) public parameters.
@@ -645,7 +644,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 {: #sec-realm-initial-measurement-claim}
 
 The Realm Initial Measurement claim contains the measurements taken of Realm state
-before the Realm is activated. 
+before the Realm is activated.
 
 This claim MUST be present in a CCA Realm state attestation token.
 
@@ -658,7 +657,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 
 The Realm Extensible Measurements claim contains measurements provided by Realm
 guest software and extended to the set of Realm Extensible Measurements
-maintained by the RMM. 
+maintained by the RMM.
 
 This claim MUST be present in a CCA Realm state attestation token.
 
@@ -699,9 +698,9 @@ This claim MUST be present in a CCA Realm state attestation token.
 {: #sec-realm-public-key-hash-algo-id-claim}
 
 The Realm public key hash algorithm identifier claim identifies the algorithm used
-hash the value of the Realm Public Key claim {{sec-realm-public-key-claim}} 
+hash the value of the Realm Public Key claim {{sec-realm-public-key-claim}}
 such that it can be presented as a Challenge for the bound CCA Platform token
-{{sec-token-binding}}. 
+{{sec-token-binding}}.
 
 This claim MUST be present in a CCA Realm state attestation token.
 
@@ -714,14 +713,14 @@ This claim MUST be present in a CCA Realm state attestation token.
 {: #sec-backwards-compat}
 
 This profile conforms to the claims in the Beta2 release of the 1.0 release of the
-Realm Management Monitor specification. {{RMM}}. There has not been a prior 
-release of this specification to the 1.0 release. Hence this section is a 
+Realm Management Monitor specification. {{RMM}}. There has not been a prior
+release of this specification to the 1.0 release. Hence this section is a
 place holder for claim changes introduced in future releases.
 
 ## Token Binding
 {: #sec-token-binding}
 
-The reference implementation uses a 'Delegated Model' for token signing. 
+The reference implementation uses a 'Delegated Model' for token signing.
 In this model, the completion of signing operations for the CCA token is
 delegated from the CCA Platform RoT to the RMM. When the RMM initialises,
 it obtains a 'Realm Attestation Token' (RAK) signing key pair from the CCA
@@ -730,16 +729,16 @@ challenge to obtain a CCA Platform token (signed by the CCA Platform RoT).
 When guest code in a Realm requests a CCA Attestation token, the RMM
 prepares a Realm state token, signed by the RAK private key, then wraps
 both tokens in a CMW Collection. The two tokens are bound together by
-the Nonce claim in the CCA Platform token having the same value as a 
+the Nonce claim in the CCA Platform token having the same value as a
 hash of the Realm Public key claim in the Realm state token (using the
 hash algorithm identified by the Realm Public Key Hash Algorithm ID claim).
 
-A verifier MUST check this binding is valid when verifying a CCA 
+A verifier MUST check this binding is valid when verifying a CCA
 Attestation token.
 
 An implementation may choose instead a 'Direct Model'. In this model,
 when guest code in a Realm requests a CCA Attestation token, the RMM
-prepares a Realm state claim set, but does not wrap it in a CMW. 
+prepares a Realm state claim set, but does not wrap it in a CMW.
 Instead, the claim set is hashed and this value is used as a Challenge
 to obtain a CCA Platform token, signed by the CCA Platform RoT. The
 CCA Platform and Realm state claim set are presented within a CMW Collection
@@ -785,7 +784,7 @@ will accept a wider range of algorithms, while Attesters would produce CCA token
 using only one such algorithm.
 
 The CCA Platform token is always directly signed by the CCA Platform RoT.  Therefore, the CCA
-claims-set is never carried in a Detached EAT bundle 
+claims-set is never carried in a Detached EAT bundle
 ({{Section 5 of EAT}}).
 
 ### Freshness Model
@@ -869,14 +868,14 @@ such as network buffers, may dictate a reasonable split point.
 
 # CCA Attestation Token Verification
 
-To verify the token for the reference profile, the initial need is to check correct 
+To verify the token for the reference profile, the initial need is to check correct
 encoding for the token. Primary trust is established by checking the signing of
 the CCA Platform token CWT.
 The key used for verification is supplied to the Verifier by an
 authorized Endorser along with the corresponding Attester's Instance ID.
 For the verifier, the CCA Platform Instance ID {{sec-instance-id-claim}} claim is
 used to assist locating the key used to verify the signature covering the CCA Platform
-CWT token. The verifier can also be supplied with the information that the 
+CWT token. The verifier can also be supplied with the information that the
 key instance has been revoked and is no longer valid.
 
 Additional validation checks on the token are:
@@ -887,7 +886,7 @@ the trustworthiness of the RAK public key.
 * Validating that the Realm state token is correctly signed by the RAK.
 * Checking that the value of the lll claim is psa-lifecycle-secured state. Note
 that some other values of this claim (psa-lifecycle-non-psa-rot-debug and
-psa-lifecycle-recoverable-psa-rot states) may indicate that the attester 
+psa-lifecycle-recoverable-psa-rot states) may indicate that the attester
 is only temporarily unsuitable and the verifier may choose the to indicate
 this as a contraindication rather than a full verification failure. See discussion
 of the CCA platform lifecycle in {{RMM}}.
@@ -933,7 +932,7 @@ Trustworthiness Vector claims | Related PSA claims
 `configuration` | Software Components ({{sec-sw-components}})
 `executables` | ditto
 `file-system` | N/A
-`hardware` | Implementation ID ({{sec-implementation-id}}) and CCA Platform config ({{}})
+`hardware` | Implementation ID ({{sec-implementation-id}}) and CCA Platform config (TODO)
 `instance-identity` | Instance ID ({{sec-instance-id-claim}}).  The Security Lifecycle ({{sec-security-lifecycle}}) can also impact the derived identity.
 `runtime-opaque` | Indirectly derived from `executables`, `hardware`, and `instance-identity`.  The Security Lifecycle ({{sec-security-lifecycle}}) can also be relevant: for example, any debug state will expose otherwise protected memory.
 `sourced-data` | N/A
@@ -1081,7 +1080,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 ### Realm Public Key Claim
 
 * Claim Name: cca-realm-public-key
-* Claim Description: CCA Realm Public Key 
+* Claim Description: CCA Realm Public Key
 * JWT Claim Name: N/A
 * Claim Key: 44237
 * Claim Value Type(s): byte string
@@ -1136,7 +1135,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 No new media type registration is requested.
 To indicate that the transmitted content is a CCA attestation token,
 applications can use the `application/eat+cwt` media type defined in
-{{EAT-MEDIATYPES}} with the `eat_profile` parameter set to 
+{{EAT-MEDIATYPES}} with the `eat_profile` parameter set to
 `tag:arm.com,2023:cca#1.0.0`.
 
 ## CoAP Content-Formats Registration
@@ -1146,7 +1145,7 @@ IANA is requested to register a CoAP Content-Format ID in the "CoAP
 Content-Formats" registry {{IANA-CoAP-Content-Formats}}:
 
 * A registration for the `application/eat+cwt` media type with the `eat_profile` parameter
-  equal to "tag:arm.com,2023:cca#1.0.0" 
+  equal to "tag:arm.com,2023:cca#1.0.0"
 
 The Content-Formats should be allocated from the Expert review range (0-255).
 
@@ -1154,7 +1153,7 @@ The Content-Formats should be allocated from the Expert review range (0-255).
 
 *  Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:cca#1.0.0"
 *  Encoding: -
-*  Id: To-be-assigned by IANA   .....TODO brackets through ID errors
+*  Id: To-be-assigned by IANA
 *  Reference: {{&SELF}}
 
 *  Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:realm#1.0.0"
@@ -1164,14 +1163,12 @@ The Content-Formats should be allocated from the Expert review range (0-255).
 
 --- back
 
-CURRENT WIP EDIT POINT
-
 # Examples
 
 The following examples show CCA attestation tokens for an hypothetical system
 comprising a single measured software component.
 The attesting device is in a lifecycle state ({{sec-security-lifecycle}}) of
-SECURED. 
+SECURED.
 
 ## COSE Sign1 Token {#ex-sign1}
 

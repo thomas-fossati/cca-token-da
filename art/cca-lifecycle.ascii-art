@@ -1,38 +1,35 @@
                  .--------------------------.
                  | Device Assembly and Test |
-                 '-------------+------------'
+                 '------------+-------------'
                               | Device
                               | Lockdown
                               v
                 .----------------------------.
                 | CCA Security Provisioning  |
                 '-----------+----------------'
-                              |
-                 Provisioning |  .-------------------.
-                   Lockdown   |  |                   |
-                              v  v                   |
+                            |
+               Provisioning |  .---------------------.
+                 Lockdown   |  |                     |
+                            v  v                     |
                       .----------------.             |Recoverable
        .--------------+    Secured     +--------.    |
        |              '-+--------------'        |    |
-      Non               |        ^       Recoverable |
-  Recoverable       RM Debug     |       Root Debug  |
-  Root Debug          Enable     |              |    |
-       |                |        |              |    |    
-       |                v        |              v    |    
-       |            .------------+--.        .-------+-.
-       |            | Realm Manager |        |  Root   |
-       |            |    Debug      |        | Debug   |
-       |            '---------------'        '--+------'
+      Non               |          ^     Recoverable |
+  Recoverable       RM Debug       |     Root Debug  |
+  Root Debug          Enable       |            |    |
+       |                |          |            |    |
+       |                v          |            v    |
+       |              .---------- -+--.      .-------+-.
+       |              | Realm Manager |      |  Root   |
+       |              |    Debug      |      | Debug   |
+       |              '---------------'      '--+------'
        |                                        |
        |            .---------------.           |
-       |----------->+   Terminate   +<----------'
-                    '---------------'        
-                            |                     
-                            |              
-                            v             
-                      .----------------. 
-                      | Decommissioned |
-                      '----------------'
-     
-     
-     
+       '----------->+   Terminate   +<----------'
+                    '---------------'
+                            |
+                            |
+                            v
+                    .----------------.
+                    | Decommissioned |
+                    '----------------'
