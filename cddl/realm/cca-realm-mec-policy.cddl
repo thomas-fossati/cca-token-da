@@ -1,0 +1,5 @@
+cca-realm-mec-policy-label = 44241
+
+cca-realm-mec-policy = (
+    cca-realm-mec-policy-label => "shared" / "private"
+)

@@ -1,0 +1,8 @@
+arm-platform-config-label = 2401 ; PSA platform range
+                                 ; TBD: add to IANA registration
+arm-platform-config-type = bytes
+
+arm-platform-config = (
+    arm-platform-config-label => arm-platform-config-type
+)
+

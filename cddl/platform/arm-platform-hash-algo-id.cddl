@@ -1,0 +1,7 @@
+arm-platform-hash-algo-id-label = 2402 ; PSA platform range
+                                       ; TBD: add to IANA registration
+
+arm-platform-hash-algo-id = (
+    arm-platform-hash-algo-id-label => text
+)
+

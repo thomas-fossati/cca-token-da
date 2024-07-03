@@ -1,0 +1,13 @@
+cca-realm-claims = (cca-realm-claim-map)
+
+cca-realm-claim-map = {
+    cca-realm-challenge
+    ? cca-realm-profile
+    cca-realm-personalization-value
+    cca-realm-initial-measurement
+    cca-realm-extensible-measurements
+    cca-realm-hash-algo-id
+    cca-realm-public-key
+    cca-realm-public-key-hash-algo-id
+    cca-realm-mec-policy
+}

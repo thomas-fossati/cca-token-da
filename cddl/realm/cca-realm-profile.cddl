@@ -1,0 +1,7 @@
+cca-realm-profile-label = 265 ; EAT profile
+
+cca-realm-profile-type = "tag:arm.com,2023:realm#1.0.0"
+
+cca-realm-profile = (
+    cca-realm-profile-label => cca-realm-profile-type
+)

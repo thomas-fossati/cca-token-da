@@ -1,0 +1,5 @@
+cca-realm-initial-measurement-label = 44238
+
+cca-realm-initial-measurement = (
+    cca-realm-initial-measurement-label => cca-realm-measurement-type
+)

@@ -1,0 +1,6 @@
+cca-realm-challenge-label = 10
+cca-realm-challenge-type = bytes .size 64
+
+cca-realm-challenge = (
+    cca-realm-challenge-label => cca-realm-challenge-type
+)

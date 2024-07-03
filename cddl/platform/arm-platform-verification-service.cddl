@@ -1,0 +1,8 @@
+arm-platform-verification-service-label = 2400 ; PSA verification service
+arm-platform-verification-service-type = text
+
+arm-platform-verification-service = (
+    arm-platform-verification-service-label =>
+        arm-platform-verification-service-type
+)
+

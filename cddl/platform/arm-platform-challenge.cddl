@@ -1,0 +1,6 @@
+arm-platform-challenge-label = 10
+
+arm-platform-challenge = (
+    arm-platform-challenge-label => arm-platform-hash-type
+)
+

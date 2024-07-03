@@ -1,0 +1,14 @@
+arm-platform-sw-components-label = 2399 ; PSA software components
+
+arm-platform-sw-component = {
+  ? 1 => text,                   ; component type
+    2 => arm-platform-hash-type, ; measurement value
+  ? 4 => text,                   ; version
+    5 => arm-platform-hash-type, ; signer id
+  ? 6 => text,                   ; hash algorithm identifier
+}
+
+arm-platform-sw-components = (
+    arm-platform-sw-components-label => [ + arm-platform-sw-component ]
+)
+

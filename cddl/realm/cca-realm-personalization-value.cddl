@@ -1,0 +1,6 @@
+cca-realm-personalization-value-label = 44235
+cca-realm-personalization-value-type = bytes .size 64
+
+cca-realm-personalization-value = (
+    cca-realm-personalization-value-label => cca-realm-personalization-value-type
+)

@@ -1,0 +1,5 @@
+cca-realm-public-key-hash-algo-id-label = 44240
+
+cca-realm-public-key-hash-algo-id = (
+    cca-realm-public-key-hash-algo-id-label => text
+)

@@ -1,0 +1,2 @@
+arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+

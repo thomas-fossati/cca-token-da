@@ -1,0 +1,7 @@
+arm-platform-implementation-id-label = 2396 ; PSA implementation ID
+arm-platform-implementation-id-type = bytes .size 32
+
+arm-platform-implementation-id = (
+    arm-platform-implementation-id-label => arm-platform-implementation-id-type
+)
+

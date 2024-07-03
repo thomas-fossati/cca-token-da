@@ -1,0 +1,14 @@
+arm-platform-claims = (arm-platform-claim-map)
+
+arm-platform-claim-map = {
+    arm-platform-profile
+    arm-platform-challenge
+    arm-platform-implementation-id
+    arm-platform-instance-id
+    arm-platform-config
+    arm-platform-lifecycle
+    arm-platform-sw-components
+    ? arm-platform-verification-service
+    arm-platform-hash-algo-id
+}
+

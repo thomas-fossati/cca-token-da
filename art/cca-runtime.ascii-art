@@ -1,0 +1,37 @@
+                       
+         HES            Realm
+         RoT           Manager       Verifier
+          |                |           |
+----------|----------------|-----------|----
+          |                |           |
+ Platform |                |           |
+    Boot  |                |           |
+   State  | Req. Platform  |           |
+     |    |   Token (#RAK) |           |
+     |    |<---------------+           |
+     v    |                |           |
+  Plat  <-|                |           |
+  Token ->|                |           |
+          |                |           |
+      <---|                |           |
+  sign    |                |           |
+      --->|   Plat Token   |           |
+          |--------------->|           |
+          |                |           |
+          |     Realm      |           |
+          |     State      |           |
+          |       |        |           |
+          |       |        |           |
+          |       v        |           |
+          |     Realm      |           |
+          |     Token      |           |
+          |            .---+           |
+          |       sign |   |           |
+          |            '-->|           |
+          |                |           |
+          |                |           |
+          |                | CCA Token |
+          |                +---------->|
+          |                |           |
+
+
