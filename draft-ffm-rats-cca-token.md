@@ -19,12 +19,12 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Arm's Confidential Compute Architecture Reference Attestation Token"
+abbrev: "CCA Reference Attestation Token"
+docname: draft-frost-rats-cca-token-latest
 category: info
+submissionType: independent
 
-docname: draft-todo-yourname-protocol-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
