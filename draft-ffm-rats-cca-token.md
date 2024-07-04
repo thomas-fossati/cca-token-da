@@ -183,7 +183,7 @@ unmodified.  An example of a RoT suitable
  for CCA would be an isolated
 Trusted subsystem responsible for initial measurements, lifecycle state
 management, identity and attestation services.  The services that the RoT
-provides for securitization of the CCA environment are descibed as Hardware-Enforced Security (HES) - 
+provides for securitization of the CCA environment are descibed as Hardware-Enforced Security (HES) -
 see Section B4.1.5 of {{RME}}.
 
 Realm-World:
