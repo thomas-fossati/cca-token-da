@@ -33,8 +33,7 @@ author:
     email: thomas.fossati2@arm.com
  -  name: Giri Mandyam
     organization: Mediatek Inc
-    email: giri.mandyam@mediatek.com
-
+    email: giridhar.mandyam@gmail.com
 contributor:
  -  name: Yogesh Deshpande
     organization: Arm Limited
@@ -117,7 +116,7 @@ entity:
 The Arm Confidential Compute Architecture (CCA) is series of hardware and software
 innovations that enhance Arm’s support for Confidential Computing for large,
 compute-intensive workloads. Devices that implement CCA can produce attestation
-tokens as described in this memo, which are the basis trustworthiness assessment of
+tokens as described in this memo, which are the basis for trustworthiness assessment of
 the Confidential Compute environment.  This document specifies the CCA attestation
 token structure and semantics.
 
@@ -145,7 +144,7 @@ inherit the trust from the Non-secure hypervisor which controls it.
 
 As outlined in the RATS Architecture {{RFC9334}}, an Attester produces a signed collection
 of Claims that constitutes Evidence about its target environment. This document focuses
-on the output provided by requests from the Realm to the RMM management component for an
+on the output provided by requests from the Realm to the Realm Management Monitor (RMM) management component for an
 attestation token that covers the state of that Realm and the CCA Platform.
 This output corresponds to Evidence in {{RFC9334}} and, as a design decision, the CCA attestation
 token is a profile of the Entity Attestation Token (EAT) {{EAT}}. Note that there are other profiles
@@ -183,7 +182,9 @@ deeper level that can verify that the Root of Trust is authentic and
 unmodified.  An example of a RoT suitable
  for CCA would be an isolated
 Trusted subsystem responsible for initial measurements, lifecycle state
-management, identity and attestation services.
+management, identity and attestation services.  The services that the RoT
+provides for securitization of the CCA environment are descibed as Hardware-Enforced Security (HES) -
+see Section B4.1.5 of {{RME}}.
 
 Realm-World:
 : Realm World, provides a security state and physical address range that provides
@@ -221,7 +222,7 @@ The Attesting Environment is responsible for collecting the information to be
 represented in CCA claims and to assemble them into Evidence. It is made of three
 cooperating components:
 
-* The Main Bootloader, executing at boot-time, measures the TCB of the Realm World
+* The Main Bootloader, executing at boot-time, measures the trusted computing base (TCB) of the Realm World
 - i.e., loaded firmware components and sends them to the HES RoT to be stored isolated.
   (CCA Platform Boot State). See {{fig-cca-attester-boot}}.
 
@@ -239,7 +240,7 @@ Realm state.
 * The HES RoT, executing at run-time, maintains measurements for the state of the CCA
 platform TCB, including the lifecycle state of the CCA platform. It can answer requests
 coming from the RMM to collect and format claims corresponding to that state and use a
-CCA Platform Attestation Key (CPAK) to sign them.
+CCA Platform Attestation Key (CPAK) to sign them.  How the CPAK is derived is implementation-specific.
 
 {: #para-pak-intro}
 
@@ -278,7 +279,7 @@ Target Environment elements:
 The two sections use inter-related claims to bind together into a single logical unit.
 See {{sec-security-consideration}} for more details.
 
-The above tokens are presented to the requester within a top level CMW collection {{CMW}}.
+The above tokens are presented to the requester within a top level Conceptual Message WWrapper (CMW) collection {{CMW}}.
 
 
 
@@ -593,7 +594,7 @@ that is the Realm that requested the attestation report.
 The Nonce claim is used to carry a challenge provided by the caller to demonstrate freshness of the generated token.
 
 The EAT {{EAT}} `nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
-attestation technologies, this specifications applies the following constraints
+attestation technologies, this specification applies the following constraints
  to the `nonce-type`:
 
 * The length MUST be either 32, 48, or 64 bytes.
@@ -683,7 +684,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 ### Realm Public Key
 {: #sec-realm-public-key-claim}
 
-The Realm public key claim identifies the key which is used to sign the Realm token
+The Realm public key claim identifies the attestation key which is used to sign the Realm token
 
 The value of the Realm public key claim is a byte string representation of a COSE_Key.
 
@@ -697,7 +698,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 ### Realm Public Key Hash Algorithm ID
 {: #sec-realm-public-key-hash-algo-id-claim}
 
-The Realm public key hash algorithm identifier claim identifies the algorithm used
+The Realm public key hash algorithm identifier claim identifies the algorithm used to
 hash the value of the Realm Public Key claim {{sec-realm-public-key-claim}}
 such that it can be presented as a Challenge for the bound CCA Platform token
 {{sec-token-binding}}.
@@ -745,7 +746,7 @@ CCA Platform and Realm state claim set are presented within a CMW Collection
 as in the Delegated model. The two parts of the collection are bound
 together by the Nonce claim in the CCA Platform token having the same value
 as the hash of the Realm state claim set. If the Direct Model is used,
-the CCA Platfrom profile claim {{sec-plat-profile-definition-claim}} MUST
+the CCA Platform profile claim {{sec-plat-profile-definition-claim}} MUST
 have a different value from the reference profile. The map value within
 the CCA Attestation token CMW Collection for the Realm state claim set
 MUST also have a different value to that used for a Realm state CMW
@@ -828,7 +829,7 @@ TODO...include cddl/cca-attestation.cddl
 
 In the CCA Platform reference design, PAKs ({{para-pak-intro}}) are raw public keys.
 
-Some implementations may choose to use an PAK that is a certified public keys. If
+Some implementations may choose to use an PAK that is a certified public key. If
 this option is taken, the value of the CCA Platform Profile Definition claim
 {{sec-plat-profile-definition-claim}} MUST be altered from the reference implementation
 value.
