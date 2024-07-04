@@ -29,8 +29,8 @@ author:
     organization: Arm Limited
     email: Simon.Frost@arm.com
  -  name: Thomas Fossati
-    organization: Arm
-    email: thomas.fossati2@arm.com
+    organization: Linaro
+    email: thomas.fossati@linaro.org
  -  name: Giri Mandyam
     organization: Mediatek Inc
     email: giridhar.mandyam@gmail.com
