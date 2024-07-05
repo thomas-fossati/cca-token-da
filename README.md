@@ -1,6 +1,6 @@
-# Arm's Platform Security Architecture (PSA) Attestation Token
+# Arm's Confidential Computing Architecture (CCA) Attestation Token
 
-This is the working area for the individual Internet-Draft, "Arm's Platform Security Architecture (PSA) Attestation Token".
+This is the working area for the individual Internet-Draft, "Arm's Confidential Computing Architecture (CCA) Attestation Token".
 
 * [Editor's Copy](https://SimonFrost-Arm.github.io/draft-ffm-rats-cca-token/#go.draft-ffm-rats-cca-token.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token)
