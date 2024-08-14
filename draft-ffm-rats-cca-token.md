@@ -107,6 +107,7 @@ informative:
     date: 2022
   RATS-CoRIM: I-D.ietf-rats-corim
   RATS-AR4SI: I-D.ietf-rats-ar4si
+  CCA-ENDORSEMENTS: I-D.draft-ydb-rats-cca-endorsements
 
 entity:
   SELF: "RFCthis"
@@ -599,7 +600,7 @@ The EAT {{EAT}} `nonce` (claim key 10) is used.  Since the EAT nonce claim offer
 attestation technologies, this specification applies the following constraints
  to the `nonce-type`:
 
-* The length MUST be either 32, 48, or 64 bytes.
+* The length MUST be 64 bytes.
 * Only a single nonce value is conveyed. The array notation MUST NOT be used for encoding the nonce value.
 
 
@@ -646,7 +647,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 ### Realm Initial Measurement
 {: #sec-realm-initial-measurement-claim}
 
-The Realm Initial Measurement claim contains the compound extension of 
+The Realm Initial Measurement claim contains the compound extension of
 measurements taken of Realm memory and state before the Realm is activated.
 
 This claim MUST be present in a CCA Realm state attestation token.
@@ -950,14 +951,13 @@ of RATS-AR4SI}}.
 ## Endorsements, Reference Values and Verification Key Material
 {: #sec-cca-endorsements}
 
-The **TODO**  ref-to-CCA-Endorsements defines a protocol based on the {{RATS-CoRIM}} data model
-that can be used to convey CCA Endorsements, Reference Values and verification
-key material to the Verifier.
-TODO... perhaps redact this section until a cca-endorsements draft is available?
+The {{CCA-ENDORSEMENTS}} defines a protocol based on the {{RATS-CoRIM}} data model
+that can be used to convey CCA Endorsements, Reference Values and Verification
+Key Material to the Verifier.
 
 # Implementation Status
 
-[^rfc-ed-note] please remove this section before pubblication.
+[^rfc-ed-note] please remove this section before publication.
 
 Implementations of this specification are provided by the Trusted
 Firmware-RMM project {{TF-RMM}} and the Veraison project {{Veraison}}.
