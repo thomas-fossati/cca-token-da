@@ -74,7 +74,6 @@ normative:
     title: CBOR Web Token (CWT) Claims
     target: https://www.iana.org/assignments/cwt/cwt.xhtml#claims-registry
     date: 2022
-  X509: RFC5280
   EAT: I-D.ietf-rats-eat
   EAT-MEDIATYPES: I-D.ietf-rats-eat-media-type
   CMW: I-D.draft-ietf-rats-msg-wrap
@@ -83,8 +82,6 @@ normative:
 informative:
   I-D.kdyxy-rats-tdx-eat-profile:
   I-D.mandyam-rats-qwestoken:
-  TLS12-IoT: RFC7925
-  TLS13-IoT: I-D.draft-ietf-uta-tls13-iot-profile
   COSE-X509: RFC9360
   RFC9334:
   IANA-CoAP-Content-Formats:
@@ -646,7 +643,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 ### Realm Initial Measurement
 {: #sec-realm-initial-measurement-claim}
 
-The Realm Initial Measurement claim contains the compound extension of 
+The Realm Initial Measurement claim contains the compound extension of
 measurements taken of Realm memory and state before the Realm is activated.
 
 This claim MUST be present in a CCA Realm state attestation token.
@@ -774,7 +771,7 @@ Therefore, the Verifier MUST be a variation-tolerant CBOR decoder.
 TODO.... need different narrative from IoT reasons...
 
 Cryptographic protection is obtained by wrapping the CCA Platform and Realm state claims-set in a COSE
-Web Token (CWT) {{!RFC8392}}.  The signature structure MUST be a tagged (18) COSE_Sign1.
+Web Token (CWT) {{!RFC8392}}.  The signature structure MUST be a tagged (18) COSE_Sign1 {{STD96}}.
 
 Acknowledging the variety of markets, regulations and use cases in which the
 CCA attestation token can be used, the baseline profile does not impose any
