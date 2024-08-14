@@ -386,7 +386,7 @@ found in the token.
 The EAT `eat_profile` (claim key 265) is used.
 
 The format of the CCA platform profile claim is defined as a text string of value
-"tag:arm.com,2023:cca#1.0.0".
+"tag:arm.com,2023:cca_platform#1.0.0".
 
 This claim MUST be present in a CCA Platform attestation token.
 
@@ -567,6 +567,8 @@ anchor to verify the digital signature, it uses the hint in the same way
 as it would treat any other information provided by an external party,
 which includes attacker-provided data.
 
+The CCA platform verification service indicator claim is OPTIONAL in a CCA platform token.
+
 ### CCA Platform Hash Algorithm ID
 {: #sec-arm-platform-hash-algm-id}
 
@@ -644,8 +646,8 @@ This claim MUST be present in a CCA Realm state attestation token.
 ### Realm Initial Measurement
 {: #sec-realm-initial-measurement-claim}
 
-The Realm Initial Measurement claim contains the measurements taken of Realm state
-before the Realm is activated.
+The Realm Initial Measurement claim contains the compound extension of 
+measurements taken of Realm memory and state before the Realm is activated.
 
 This claim MUST be present in a CCA Realm state attestation token.
 
@@ -967,13 +969,6 @@ These implementations are released as open-source software.
 This specification re-uses the EAT specification and therefore the CWT specification.
 Hence, the security and privacy considerations of those specifications apply here as well.
 
-
-TODO... questionable ability to execute on this as anyone can call RSI??
-A PSA Attester MUST NOT provide Evidence to an untrusted
-challenger, as it may allow attackers to interpose and trick the Verifier into
-believing the attacker is a legitimate Attester.
-This is especially relevant to protocols that use PSA attestation tokens to authenticate the attester to a relying party.
-
 Attestation tokens contain information that may be unique to a device and
 therefore they may allow singling out an individual device for tracking
 purposes.  Deployments that have privacy requirements must take appropriate
@@ -1137,7 +1132,7 @@ No new media type registration is requested.
 To indicate that the transmitted content is a CCA attestation token,
 applications can use the `application/eat+cwt` media type defined in
 {{EAT-MEDIATYPES}} with the `eat_profile` parameter set to
-`tag:arm.com,2023:cca#1.0.0`.
+`tag:arm.com,2023:cca_platform#1.0.0`.
 
 ## CoAP Content-Formats Registration
 {: #sec-iana-coap-content-format}
@@ -1146,13 +1141,13 @@ IANA is requested to register a CoAP Content-Format ID in the "CoAP
 Content-Formats" registry {{IANA-CoAP-Content-Formats}}:
 
 * A registration for the `application/eat+cwt` media type with the `eat_profile` parameter
-  equal to "tag:arm.com,2023:cca#1.0.0"
+  equal to "tag:arm.com,2023:cca_platform#1.0.0"
 
 The Content-Formats should be allocated from the Expert review range (0-255).
 
 ### Registry Contents
 
-*  Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:cca#1.0.0"
+*  Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:cca_platform#1.0.0"
 *  Encoding: -
 *  Id: To-be-assigned by IANA
 *  Reference: {{&SELF}}
