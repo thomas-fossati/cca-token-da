@@ -13,7 +13,7 @@ FRAGS += $(addprefix ../platform/,$(PLATFORM_FRAGS))
 check: check-top check-top-examples
 .PHONY: check
 
-clean: ; $(RM) -f $(CLEANFILES)
+clean: ; rm -f $(CLEANFILES)
 .PHONY: clean
 
 $(eval $(call cddl_check_template,top,$(FRAGS),$(EXAMPLES)))
