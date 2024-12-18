@@ -10,7 +10,7 @@ else
 	    -b main https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
 
-$(drafts_xml):: cddl/top/top-autogen.cddl
+$(drafts_xml): cddl/top/top-autogen.cddl
 
 cddl/top/top-autogen.cddl: ; $(MAKE) -C cddl check
 
