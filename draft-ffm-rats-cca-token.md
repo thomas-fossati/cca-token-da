@@ -1170,7 +1170,7 @@ The eat-nonce may be set to a hash of the RAK public key if the delegated model 
 then the eat-nonce is a hash of the realm claims set, which includes verifier-provided challenge data.
 
 ~~~
-{::include cddl/sample_tokens/platform.diag}
+{::include-fold cddl/sample_tokens/platform.diag}
 ~~~
 
 ## COSE Sign1 Token {#ex-sign1}
