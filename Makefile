@@ -9,3 +9,9 @@ else
 	git clone -q --depth 10 $(CLONE_ARGS) \
 	    -b main https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
+
+$(drafts_xml): cddl/top/top-autogen.cddl
+
+cddl/top/top-autogen.cddl: ; $(MAKE) -C cddl check
+
+clean:: ; $(MAKE) -C cddl clean
