@@ -1,34 +1,34 @@
-          HES           Realm
-          RoT           Manager     Verifier
-           |               |           |
------------+---------------+-----------+----
-           |               |           |
- Platform  |               |           |
- Boot      |               |           |
- State     | Req. Platform |           |
-  |        | Token (#RAK)  |           |
-  |        |<--------------+           |
-  v        |               |           |
-Platform <-|               |           |
-  Token  ->|               |           |
-           |               |           |
-       <---|               |           |
-   sign    |               |           |
-       --->|   Plat Token  |           |
-           +-------------->|           |
-           |               |           |
-           |     Realm     |           |
-           |     State     |           |
-           |       |       |           |
-           |       |       |           |
-           |       v       |           |
-           |     Realm     |           |
-           |     Token     |           |
-           |           .---+           |
-           |      sign |   |           |
-           |           '-->|           |
-           |               |           |
-           |               |           |
-           |               | CCA Token |
-           |               +---------->|
-           |               |           |
+           HES           Realm
+           RoT           Manager     Verifier
+            |               |           |
+            |               |           |
+  Platform  |               |           |
+  Boot      |               |           |
+  State     | Req. Platform |           |
+    |       | Token (#RAK)  |           |
+    |       |<--------------+           |
+    v       |               |           |
+  Platform  |               |           |
+  Token     |               |           |
+            |               |           |
+   sign .---+               |           |
+   w/   |   |               |           |
+   CPAK '-->|   Plat Token  |           |
+            +-------------->|           |
+            |               |           |
+            |     Realm     |           |
+            |     State     |           |
+            |       |       |           |
+            |       |       |           |
+            |       v       |           |
+            |     Realm     |           |
+            |     Token     |           |
+            |               |           |
+            |      sign .---+           |
+            |      w/   |   |           |
+            |      RAK  '-->|           |
+            |               |           |
+            |               |           |
+            |               | CCA Token |
+            |               +---------->|
+            |               |           |

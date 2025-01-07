@@ -1,5 +1,5 @@
 ---
-v: 1
+v: 3
 
 title: "Arm's Confidential Compute Architecture Reference Attestation Token"
 abbrev: "CCA Reference Attestation Token"
@@ -205,46 +205,60 @@ In this document, the structure of data is specified in Concise Data Definition 
 
 # CCA Attester Model
 
-{{fig-cca-attester}} outlines the structure of the CCA Attester according to
-the conceptual model described in {{Section 3.1 of RFC9334}}.
+There are two kinds of CCA Attester: direct and delegated.
+Their architectural arrangements are described in {{direct}} and {{delegated}}, respectively.
+
+## Direct {#direct}
+
+TODO
+
+## Delegated {#delegated}
+
+The structure of the CCA delegated Attester is illustrated in {{fig-cca-delegated-attester}}.
+The CCA delegated Attester is a "layered attester" ({{Section 3.2 of RFC9334}}) with exactly two layers: platform and realm.
+
+The Realm Management Monitor (RMM) is the top layer Attesting Environment.
+It attests to the initial memory content of each Realm that is executed on a CCA platform, and any dynamic measurements provided by Realm guest code.
+It uses its own private key called RAK (Realm Attestation Key) to sign the claims regarding the requesting Realm.
+
+The HES (Hardware Enforced Security) is the bottom layer Attesting Environment, which acts as the CCA platform hardware RoT.
+It attests to the executables and configuration contents of the "Monitor Security Domain", which includes the RMM, as well as a few relevant CCA parameters (e.g., the CCA platform implementation identifier), and the security lifecycle state of the platform.
+Additionally, it generates the RAK keypair, transfers it over a trusted channel to the RMM, and stores the hash of the RAK public key in a claim that is signed using the CCA Platform Attestation Key (CPAK) as part of the platform Evidence.
+
+The CCA Evidence produced in delegated mode comprises two separately signed EATs, one for the platform, another for the realm, wrapped in a CMW {{CMW}} collection.
+The intra-collection binding is detailed in {{sec-token-binding}}.
 
 ~~~ aasvg
-{::include art/cca-attester.ascii-art}
+{::include art/cca-delegated.ascii-art}
 ~~~
-{: #fig-cca-attester title="CCA Attester" }
+{: #fig-cca-delegated-attester title="CCA Attester" }
 
-The CCA Attester is a relatively straightforward embodiment of the RATS
-Attester with exactly one Attesting Environment and one or more Target Environments.
+## Boot Phase
 
-The Attesting Environment is responsible for collecting the information to be
-represented in CCA claims and to assemble them into Evidence. It is made of three
-cooperating components:
+The HES Attesting Environment is responsible for collecting the information to be
+represented in CCA platform claims and to assemble them into Evidence.
 
-* The Main Bootloader, executing at boot-time, measures the trusted computing base (TCB) of the Realm World
-- i.e., loaded firmware components and sends them to the HES RoT to be stored isolated.
-  (CCA Platform Boot State). See {{fig-cca-attester-boot}}.
+The Main Bootloader, executing at boot-time, measures the trusted computing base (TCB) of the Realm World - i.e., loaded firmware components and the associated configuration payloads - and sends them to the HES RoT to be stored isolated.  See {{fig-cca-attester-boot}}.
 
 ~~~ aasvg
 {::include art/cca-boot.ascii-art}
 ~~~
 {: #fig-cca-attester-boot title="CCA Attester Boot Phase" align="center" }
 
-* The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
+## Run-time Phase
+
+The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
 the state of a Realm. It can respond to requests issued from a Realm for an attestation
 token relevant for that Realm by obtaining a CCA Platform attestation token from the
 HES RoT and combining that with an attestation token containing Evidence reflecting
 Realm state.
 
-* The HES RoT, executing at run-time, maintains measurements for the state of the CCA
+{: #para-pak-intro}
+The HES RoT, executing at run-time, maintains measurements for the state of the CCA
 platform TCB, including the lifecycle state of the CCA platform. It can answer requests
 coming from the RMM to collect and format claims corresponding to that state and use a
-CCA Platform Attestation Key (CPAK) to sign them.  How the CPAK is derived is implementation-specific.
-
-{: #para-pak-intro}
-
-See {{fig-cca-attester-runtime}}.
-
-
+CCA Platform Attestation Key (CPAK) to sign them (see {{fig-cca-attester-runtime}}).
+How the CPAK is derived is implementation-specific.
 
 ~~~ aasvg
 {::include art/cca-runtime.ascii-art}
@@ -252,13 +266,6 @@ See {{fig-cca-attester-runtime}}.
 {: #fig-cca-attester-runtime
    title="CCA Attester Run-time Phase"
    align="center" }
-
-The Target Environment consists of two elements:
-
-* Realm World TCB - hardware, firmware and configuration contributions.
-
-* Individual state of a Realm - measurements of the initial state of the Realm
-and dynamic measurements provided by Realm guest code.
 
 A reference implementation of the CCA Attester is provided by {{TF-RMM}}.
 
