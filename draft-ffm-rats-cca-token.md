@@ -1170,6 +1170,16 @@ comprising a single measured software component.
 The attesting device is in a lifecycle state ({{sec-security-lifecycle}}) of
 SECURED.
 
+## Sample Platform Token in CWT/COSE Sign1 Format
+
+The following sample claim set and token are representative of a CCA Platform Token.
+The eat-nonce may be set to a hash of the RAK public key if the delegated model is assumed.  If not,
+then the eat-nonce is a hash of the realm claims set, which includes verifier-provided challenge data.
+
+~~~
+{::include-fold cddl/sample_tokens/platform.diag}
+~~~
+
 ## COSE Sign1 Token {#ex-sign1}
 
 ~~~
