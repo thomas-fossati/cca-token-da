@@ -25,3 +25,7 @@ ifeq ($(strip $(cbor2pretty)),)
   $(error cbor2pretty tool not found. To install cbor2pretty, run: 'gem install cbor-diag')
 endif
 
+xxd ?= $(shell command -v xxd)
+ifeq ($(strip $(xxd)),)
+  $(error xxd tool not found. Make sure it is installed and in PATH)
+endif

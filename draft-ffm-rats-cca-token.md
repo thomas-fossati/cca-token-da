@@ -1166,44 +1166,69 @@ The Content-Formats should be allocated from the Expert review range (0-255).
 # Examples
 
 The following examples show CCA attestation tokens for an hypothetical system
-comprising a single measured software component.
+comprising a single number of software component.
 The attesting device is in a lifecycle state ({{sec-security-lifecycle}}) of
 SECURED.
 
-## Sample Platform Token in CWT/COSE Sign1 Format
+## Delegated Mode
 
-The following sample claim set and token are representative of a CCA Platform Token.
-The eat-nonce may be set to a hash of the RAK public key if the delegated model is assumed.  If not,
-then the eat-nonce is a hash of the realm claims set, which includes verifier-provided challenge data.
+The following sample claim set and token are representative of a CCA Token using "delegated mode" described in {{delegated}}.
 
-~~~
-{::include-fold cddl/sample_tokens/platform.diag}
-~~~
+In this model, the `eat_nonce` claim in the Platform token contains a hash of the RAK public key claim in the Realm token.
 
-## COSE Sign1 Token {#ex-sign1}
+### Platform Claims Set
 
-~~~
-TODO...include cddl/example/sign1-claims.diag
+The CCA Platform claims set is
+
+~~~ cbor-diag
+{::include-fold cddl/platform/examples/3.diag}
 ~~~
 
-The JWK representation of the PAK used for creating the COSE Sign1 signature
-over the PSA token is:
+### Realm Claims Set
+
+The CCA Realm claims set is
+
+~~~ cbor-diag
+{::include-fold cddl/realm/examples/1.diag}
+~~~
+
+### Platform Attestation Key
+
+The COSE Key representation of the Platform Attestation Key (PAK) used for creating the COSE Sign1 signature over the CCA Platform token is
+
+~~~ cbor-diag
+{::include-fold cddl/misc/pak.diag}
+~~~
+
+### Realm Attestation Key
+
+The COSE Key representation of the Realm Attestation Key (RAK) used for creating the COSE Sign1 signature over the CCA Realm token is
+
+~~~ cbor-diag
+{::include-fold cddl/misc/rak.diag}
+~~~
+
+### Signed and Bound Assembly
+
+The resulting CMW collection is
 
 ~~~
-TODO...include cddl/example/tfm-es-iak.json
-~~~
-
-The resulting COSE object is:
-
-~~~
-TODO...include cddl/example/psa-sign1.diag
+{::include-fold cddl/top/examples/1.diag}
 ~~~
 
 which has the following base16 encoding:
 
 ~~~
-TODO...include cddl/example/psa-sign1.hex
+{::include-fold cddl/top/examples/1.hex}
 ~~~
+
+## Direct Mode
+
+The following sample claim sets and the resulting CCA Token are representative of a CCA Token using "direct mode" ({{direct}}).
+
+In "direct mode" the `eat_nonce` claim in the Platform token contains a hash of the Realm claims set, which includes verifier-provided challenge data.
+
+TODO
 
 # Acknowledgments
 {:numbered="false"}
