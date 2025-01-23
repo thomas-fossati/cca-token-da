@@ -16,4 +16,6 @@ check: check-top check-top-examples
 clean: ; rm -f $(CLEANFILES)
 .PHONY: clean
 
+EXAMPLES := $(wildcard examples/*.diag)
+
 $(eval $(call cddl_check_template,top,$(FRAGS),$(EXAMPLES)))

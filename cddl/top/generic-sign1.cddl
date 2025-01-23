@@ -1,7 +1,7 @@
 ;# import rfc9052
 
-COSE_Sign1<C> = [
+COSE_Sign1<C> = #6.18([
   Headers
   payload: bytes .cbor C
   signature: bytes
-]
+])
