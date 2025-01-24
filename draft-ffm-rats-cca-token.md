@@ -350,6 +350,10 @@ apply to the `ueid-type`:
 * The length MUST be 33 bytes.
 * The first byte MUST be 0x01 (RAND) followed by the 32-byte unique identifier of the PAK.
 
+~~~ cbor-diag
+{::include cddl/platform/eat-ueid-rand.cddl}
+~~~
+
 This claim MUST be present in a CCA Platform attestation token.
 
 ~~~
