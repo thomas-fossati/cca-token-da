@@ -1,5 +1,6 @@
 cca-realm-extensible-measurements-label = 44239
 
 cca-realm-extensible-measurements = (
-    cca-realm-extensible-measurements-label => [ 4*4 cca-realm-measurement-type ]
+    cca-realm-extensible-measurements-label =>
+        [ 4*4 cca-realm-measurement-type ]
 )

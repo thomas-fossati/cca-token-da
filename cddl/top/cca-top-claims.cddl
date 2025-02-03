@@ -1,6 +1,7 @@
-cca-token = #6.399(cca-token-collection) ; CMW (draft-ietf-rats-msg-wrap) Collection
+; CMW (draft-ietf-rats-msg-wrap) Collection
+cca-token = #6.399(cca-token-collection)
 
 cca-token-collection = {
-    44234 => COSE_Sign1<arm-platform-claims> ; 44234 = 0xACCA
-    44241 => COSE_Sign1<cca-realm-claims>
+    44234 => bytes .cbor COSE_Sign1<arm-platform-claims> ; 44234=0xACCA
+    44241 => bytes .cbor COSE_Sign1<cca-realm-claims>
 }

@@ -1,8 +1,6 @@
 arm-platform-instance-id-label = 256 ; EAT ueid
 
-; TODO: require that the first byte of arm-platform-instance-id-type is 0x01
-; EAT UEIDs need to be 7 - 33 bytes
-arm-platform-instance-id-type = bytes .size 33
+arm-platform-instance-id-type = eat-ueid-rand-type
 
 arm-platform-instance-id = (
     arm-platform-instance-id-label => arm-platform-instance-id-type

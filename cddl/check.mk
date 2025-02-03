@@ -21,11 +21,14 @@ check-$(1)-examples: $(1)-autogen.cddl $(3:.diag=.cbor)
 	  $$(cddl) $$< validate $$$$f &>/dev/null || exit 1 ; \
 	  echo ">> saving prettified CBOR to $$$${f%.cbor}.pretty" ; \
 	  $$(cbor2pretty) $$$$f > $$$${f%.cbor}.pretty ; \
+	  echo ">> saving hexified CBOR to $$$${f%.cbor}.hex" ; \
+	  $$(xxd) -p $$$$f > $$$${f%.cbor}.hex ; \
 	done
 
 .PHONY: check-$(1)-examples
 
 CLEANFILES += $(3:.diag=.cbor)
 CLEANFILES += $(3:.diag=.pretty)
+CLEANFILES += $(3:.diag=.hex)
 
 endef # cddl_check_template
