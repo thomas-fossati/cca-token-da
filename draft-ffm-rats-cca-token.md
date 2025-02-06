@@ -210,7 +210,7 @@ Their architectural arrangements are described in {{direct}} and {{delegated}}, 
 
 ## Direct {#direct}
 
-TODO
+TODO: [Issue #16](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/16)
 
 ## Delegated {#delegated}
 
@@ -780,7 +780,7 @@ Besides, only definite-length string, arrays, and maps are allowed.
 Given that a PSA Attester is typically found in a constrained device, it MAY
 NOT emit CBOR preferred serializations ({{Section 4.1 of STD94}}).
 Therefore, the Verifier MUST be a variation-tolerant CBOR decoder.
-TODO.... need different narrative from IoT reasons...
+TODO: [Issue #31](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/31) need different narrative from IoT reasons
 
 Cryptographic protection is obtained by wrapping the CCA Platform and Realm state claims-set in a COSE
 Web Token (CWT) {{!RFC8392}}.  The signature structure MUST be a tagged (18) COSE_Sign1 {{STD96}}.
@@ -840,12 +840,12 @@ TODO...include cddl/cca-attestation.cddl
 
 In the CCA Platform reference design, PAKs ({{para-pak-intro}}) are raw public keys.
 
-Some implementations may choose to use an PAK that is a certified public key. If
+Some implementations may choose to use a PAK that is a certified public key. If
 this option is taken, the value of the CCA Platform Profile Definition claim
 {{sec-plat-profile-definition-claim}} MUST be altered from the reference implementation
 value.
 
-TODO... perhaps lose this justification section as...
+TODO: [Issue #32](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/32) Cut the following block?
 
 Certified public keys require the manufacturer to run the certification
 authority (CA) that issues X.509 certs for the PAKs.  (Note that operating a CA
@@ -861,7 +861,7 @@ Using certified public keys offers better scalability properties when compared t
 
 Furthermore, existing and well-understood revocation mechanisms can be readily used.
 
-TODO... ...to here
+TODO: [Issue #35](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/35) improve cert description
 
 The PAK's X.509 cert can be inlined in the CCA Platform token using the `x5chain` COSE
 header parameter {{COSE-X509}} at the cost of an increase in the CCA Platform token
@@ -873,7 +873,8 @@ chain, or the EE and the full chain up to the trust anchor (see {{Section 2 of
 COSE-X509}} for the details).
 
 
-TODO...lose following as IoT centric?? ::
+TODO: [Issue #33](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/33) lose following as IoT centric??
+
 Constraints around network bandwidth and computing resources available to endpoints,
 such as network buffers, may dictate a reasonable split point.
 
@@ -998,7 +999,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2395
 * Claim Value Type(s): unsigned integer
-* Change Controller: Hannes Tschofenig      TODO... find document centric change controller...
+* Change Controller: Hannes Tschofenig      TODO: [Issue #34](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/34) find document centric change controller
 * Specification Document(s): {{sec-security-lifecycle}} of {{&SELF}}
 
 ### Implementation ID Claim
