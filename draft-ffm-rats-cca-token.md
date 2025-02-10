@@ -831,8 +831,8 @@ For use in CCA tokens, it must be possible to encode the epoch handle as an opaq
 
 # Collated CDDL
 
-~~~
-TODO...include cddl/cca-attestation.cddl
+~~~ cddl
+{::include-fold cddl/top/top-autogen.cddl}
 ~~~
 
 # Signing key implementation alternatives
