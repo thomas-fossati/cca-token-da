@@ -29,3 +29,8 @@ xxd ?= $(shell command -v xxd)
 ifeq ($(strip $(xxd)),)
   $(error xxd tool not found. Make sure it is installed and in PATH)
 endif
+
+curl ?= $(shell command -v curl)
+ifeq ($(strip $(curl)),)
+  $(error curl tool not found. Make sure it is installed and in PATH)
+endif

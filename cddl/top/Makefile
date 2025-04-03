@@ -9,6 +9,10 @@ include ../realm/frags.mk
 
 FRAGS += $(addprefix ../realm/,$(REALM_FRAGS))
 FRAGS += $(addprefix ../platform/,$(PLATFORM_FRAGS))
+ifdef DA_COEV
+  include ../da-coev/frags.mk
+  FRAGS += $(addprefix ../da-coev/,$(DA_COEV_FRAGS))
+endif
 
 check: check-top check-top-examples
 .PHONY: check

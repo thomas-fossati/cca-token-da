@@ -1,7 +1,17 @@
 ; CMW (draft-ietf-rats-msg-wrap) Collection
-cca-token = #6.399(cca-token-collection)
+cca-token = #6.399(cca-token-cmw-collection)
 
-cca-token-collection = {
-    44234 => bytes .cbor COSE_Sign1<arm-platform-claims> ; 44234=0xACCA
-    44241 => bytes .cbor COSE_Sign1<cca-realm-claims>
+cca-token-cmw-collection = {
+  44234 => [  ; 44234=0xACCA
+    263
+    bytes .cbor COSE_Sign1<arm-platform-claims>
+  ]
+  44241 => [
+    263
+    bytes .cbor COSE_Sign1<cca-realm-claims>
+  ]
+  ? 44444 => [
+    10571 ; application/ce+cbor
+    bytes .cbor concise-evidence-map
+  ]
 }
