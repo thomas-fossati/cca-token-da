@@ -6,13 +6,13 @@ FRAGS += generic-sign1.cddl
 
 include ../platform/frags.mk
 include ../realm/frags.mk
+include ../da-coev/frags.mk
+include ../da-eat/frags.mk
 
 FRAGS += $(addprefix ../realm/,$(REALM_FRAGS))
 FRAGS += $(addprefix ../platform/,$(PLATFORM_FRAGS))
-ifdef DA_COEV
-  include ../da-coev/frags.mk
-  FRAGS += $(addprefix ../da-coev/,$(DA_COEV_FRAGS))
-endif
+FRAGS += $(addprefix ../da-coev/,$(DA_COEV_FRAGS))
+FRAGS += $(addprefix ../da-eat/,$(DA_EAT_FRAGS))
 
 check: check-top check-top-examples
 .PHONY: check

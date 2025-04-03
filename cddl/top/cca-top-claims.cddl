@@ -3,15 +3,19 @@ cca-token = #6.399(cca-token-cmw-collection)
 
 cca-token-cmw-collection = {
   44234 => [  ; 44234=0xACCA
-    263
+    263 ; application/eat+cwt
     bytes .cbor COSE_Sign1<arm-platform-claims>
   ]
   44241 => [
-    263
+    263 ; application/eat+cwt
     bytes .cbor COSE_Sign1<cca-realm-claims>
   ]
   ? 44444 => [
     10571 ; application/ce+cbor
     bytes .cbor concise-evidence-map
+  ]
+  ? 88888 => [
+    267 ; application/eat-ucs+cbor
+    bytes .cbor da-eat-claims
   ]
 }
