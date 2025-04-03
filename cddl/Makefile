@@ -3,6 +3,7 @@ MAKECMDGOALS ?= $(.DEFAULT_GOAL)
 
 SUBDIRS := platform
 SUBDIRS += realm
+SUBDIRS += da-eat
 SUBDIRS += top
 
 $(MAKECMDGOALS): ; for d in $(SUBDIRS) ; do $(MAKE) -C $$d $@ ; done
