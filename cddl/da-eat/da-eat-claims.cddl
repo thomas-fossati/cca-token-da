@@ -1,5 +1,29 @@
-da-eat-claims = (da-eat-claim-map)
-
-da-eat-claim-map = {
-  ; TODO(mathieu)
+da-eat-claims = {
+  &(eat_profile: 265) => "tag:linaro.org,2025:spdm-eat#1.0.0"
+  &(eat_nonce: 10) => bytes .size (8..64)
+  &(spdm-blocks: 10000) => [ + spdm-measurement ]
+  &(spdm-signature: 10001) => spdm-signature
+  &(spdm-transcript: 10002) => spdm-transcript
 }
+
+block-id = uint
+spdm-signature = bytes
+spdm-measurement = (
+  block-id
+  component-type
+  digest-measurement / raw-measurement
+)
+spdm-transcript = bytes
+
+component-type /= &(immutable-rom: 0)
+component-type /= &(mutable-firmware: 1)
+component-type /= &(hardware-config: 2)
+; etc.
+
+raw-measurement = bytes
+digest-measurement = digest
+
+digest = [
+  alg: uint / text
+  val: bytes
+]

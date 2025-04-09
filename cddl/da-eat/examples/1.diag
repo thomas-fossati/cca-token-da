@@ -1,3 +1,12 @@
 {
-  / TODO(mathieu) /
+  / profile / 265: "tag:linaro.org,2025:spdm-eat#1.0.0",
+  / nonce / 10: h'17D09CA9F24E73D23D325097B22248871C270B5EFABFBE8C',
+  / measurements / 10000: [
+    / index / 1, / type / 2, / measurement (raw) / h'7768657265736F',
+    / index / 2, / type / 0, / measurement (digest) / [ 1, h'776169617461'],
+    / index / 4, / type / 2, / measurement (raw) / h'6D6F6E6E79'
+  ],
+  / signature / 10001: h'4361756C6572706163656165',
+  / transcript / 10002: h'7365616C616E74'
 }
+
