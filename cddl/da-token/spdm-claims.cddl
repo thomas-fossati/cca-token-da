@@ -1,15 +1,7 @@
 spdm-claims = {
-  &(measurements: 1) => {
-    + block-id => spdm-measurement
-  }
-  &(certificates: 2) => {
-    device-cert-slot => cert-chain
-    ? aux-cert-slots => cert-chain
-  }
+  &(measurements: 1) => { + block-id => spdm-measurement }
+  &(certificates: 2) => spdm-certificates
   ? &(signature: 3) => spdm-measurement-blocks-signature
 }
 
-cert-chain = bytes ; TODO(mathieu) is this PEM or DER?
 block-id = 0..254 ; TODO(mathieu) is the upper bound 250 instead?
-device-cert-slot = 0
-aux-cert-slots = 1..7

@@ -1,0 +1,9 @@
+spdm-certificates = {
+  device-cert-slot => cert-chain
+  ? aux-cert-slots => cert-chain
+}
+
+cert-chain = bytes ; TODO(mathieu) is this PEM or DER?
+
+device-cert-slot = 0
+aux-cert-slots = 1..7
