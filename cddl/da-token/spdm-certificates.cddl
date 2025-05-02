@@ -3,7 +3,9 @@ spdm-certificates = {
   ? aux-cert-slots => cert-chain
 }
 
-cert-chain = bytes ; TODO(mathieu) is this PEM or DER?
+; ASN.1 DER-encoded certificates concatenated with no intermediate
+; padding.
+cert-chain = bytes
 
 device-cert-slot = 0
 aux-cert-slots = 1..7

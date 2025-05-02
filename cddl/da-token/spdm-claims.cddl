@@ -4,4 +4,4 @@ spdm-claims = {
   ? &(signature: 3) => spdm-measurement-blocks-signature
 }
 
-block-id = 0..254 ; TODO(mathieu) is the upper bound 250 instead?
+block-id = 0..239
